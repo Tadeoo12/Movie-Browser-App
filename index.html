@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wi wok de tok</title>
+  <link rel="stylesheet" href="C:\IT movie browser app\src\css\style.css">
+</head>
+<body>
+  <header>
+    <h1>Movie Browser</h1>
+    <input type="text" placeholder="Don't click here to search for a movie" id="searchInput" />
+  </header>
+
+  <main id="movieGrid"></main>
+
+  <script>
+    const movies = [
+      {
+        title: "Free Guy",
+        year: "2021",
+        posterUrl: "https://lh6.googleusercontent.com/proxy/b_mrX0XJ2OTvd5QSlhrI4Ut9SmId7XlXB1HUgdlFtnhxdeOjuTHwFusA8vhJwXwpGJqi3TBv8BCQk8BDzQnEpRcGyYEdFMn-uUpKsaJG"
+      },
+      {
+        title: "Top Gun: Maverick",
+        year: "2022",
+        posterUrl: "https://m.media-amazon.com/images/I/71BokibfVUL.jpg"
+      },
+      {
+        title: "Mission: Impossible – Dead Reckoning Part One",
+        year: "2023",
+        posterUrl: "https://m.media-amazon.com/images/I/91dYe4m4XXL._AC_UF894,1000_QL80_.jpg"
+      },
+      {
+        title: "Detective Conan: The Million-Dollar Pentagram (名探偵コナン 100万ドルの五稜星)",
+        year: "2024",
+        posterUrl: "https://m.media-amazon.com/images/M/MV5BYjQ4OWRiOTEtMDhjYS00YWEyLWFlNDEtNWJlYmViZjBjNjhhXkEyXkFqcGc@._V1_.jpg"
+      },
+      {
+        title: "A Minecraft Movie",
+        year: "2025",
+        posterUrl: "https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+      },
+    ];
+
+    const movieGrid = document.getElementById("movieGrid");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderMovies(list) {
+      movieGrid.innerHTML = "";
+      list.forEach(movie => {
+        const card = document.createElement("div");
+        card.className = "movie-card";
+        card.innerHTML = `
+          <img src="${movie.posterUrl}" alt="${movie.title} Poster">
+          <h3>${movie.title}</h3>
+          <p>Year: ${movie.year}</p>
+        `;
+        movieGrid.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = movies.filter(movie => movie.title.toLowerCase().includes(query));
+      renderMovies(filtered);
+    });
+
+    // Initial render
+    renderMovies(movies);
+  </script>
+</body>
+</html>
